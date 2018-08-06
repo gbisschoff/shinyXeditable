@@ -16,10 +16,7 @@ $.extend(editabletext, {
 
      // initialize our switch based on the extracted state
      // note $("#" + el.id) equals the input tag we generated
-     $("#" + el.id).editable({
-       send: "always",
-       url: function(el) {$(el).trigger('save')}
-     });
+     $("#" + el.id).editable();
   },
   // return the ID of the DOM element
   getId: function(el) {
@@ -42,7 +39,8 @@ $.extend(editabletext, {
   // the server.
   subscribe: function(el, callback) {
     $(el).on('save.editabletext', function(event) {
-      callback();
+      alert( "clicked" );
+      callback(true);
     });
   },
   
@@ -57,6 +55,11 @@ $.extend(editabletext, {
     if (data.hasOwnProperty('label'))
       this.setValue(el, data.value);
     $(el).trigger('change');
+  },
+  getRatePolicy: function() {
+    return {
+      policy: 'direct'
+    };
   }
 });
   
